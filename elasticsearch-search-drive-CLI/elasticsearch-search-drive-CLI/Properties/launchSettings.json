@@ -42,7 +42,7 @@
     },
     "Index Single Directory": {
       "commandName": "Project",
-      "commandLineArgs": "index C:\\Documents",
+      "commandLineArgs": "index R:\\",
       "environmentVariables": {
         "ELASTICSEARCH_URL": "http://localhost:9200",
         "INDEX_NAME": "disk-items"
