@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/CopilotSnapshots/3C2ECEF6024F994EB422AD9F5402D1D1
+/elasticsearch-search-drive-CLI/.vs
+/elasticsearch-search-drive-CLI/elasticsearch-search-drive-CLI/bin/Debug/net10.0
+/elasticsearch-search-drive-CLI/elasticsearch-search-drive-CLI/obj
