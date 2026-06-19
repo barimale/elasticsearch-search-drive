@@ -1,0 +1,60 @@
+{
+  "profiles": {
+    "Search Example": {
+      "commandName": "Project",
+      "commandLineArgs": "search document",
+      "environmentVariables": {
+        "ELASTICSEARCH_URL": "http://localhost:9200",
+        "INDEX_NAME": "disk-items"
+      }
+    },
+    "Search by Extension": {
+      "commandName": "Project",
+      "commandLineArgs": "search .txt --extension",
+      "environmentVariables": {
+        "ELASTICSEARCH_URL": "http://localhost:9200",
+        "INDEX_NAME": "disk-items"
+      }
+    },
+    "Search All Files": {
+      "commandName": "Project",
+      "commandLineArgs": "search --all-files",
+      "environmentVariables": {
+        "ELASTICSEARCH_URL": "http://localhost:9200",
+        "INDEX_NAME": "disk-items"
+      }
+    },
+    "Search All Directories": {
+      "commandName": "Project",
+      "commandLineArgs": "search --all-dirs",
+      "environmentVariables": {
+        "ELASTICSEARCH_URL": "http://localhost:9200",
+        "INDEX_NAME": "disk-items"
+      }
+    },
+    "Index Recursive": {
+      "commandName": "Project",
+      "commandLineArgs": "index C:\\ --recursive",
+      "environmentVariables": {
+        "ELASTICSEARCH_URL": "http://localhost:9200",
+        "INDEX_NAME": "disk-items"
+      }
+    },
+    "Index Single Directory": {
+      "commandName": "Project",
+      "commandLineArgs": "index C:\\Documents",
+      "environmentVariables": {
+        "ELASTICSEARCH_URL": "http://localhost:9200",
+        "INDEX_NAME": "disk-items"
+      }
+    },
+    "Help": {
+      "commandName": "Project",
+      "commandLineArgs": "help",
+      "environmentVariables": {
+        "ELASTICSEARCH_URL": "http://localhost:9200",
+        "INDEX_NAME": "disk-items"
+      }
+    }
+  }
+}

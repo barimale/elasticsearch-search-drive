@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="elasticsearch-docker.ps1" />
+  </Folder>
+  <Project Path="elasticsearch-search-drive-CLI/elasticsearch-search-drive-CLI.csproj" />
+</Solution>
