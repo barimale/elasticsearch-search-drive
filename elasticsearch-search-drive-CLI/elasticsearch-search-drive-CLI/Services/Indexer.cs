@@ -23,8 +23,21 @@ namespace elasticsearch_search_drive_CLI.Services
 
             var settings = new ConnectionSettings(new Uri(elasticsearchUrl))
                 .DefaultIndex(_indexName)
-                .DisableDirectStreaming() // For better debugging
-                .PrettyJson();
+                .DisableDirectStreaming(true) // For better debugging
+                .PrettyJson()
+                .OnRequestCompleted(call =>
+                {
+                    // Log request/response for debugging
+                    Console.WriteLine($"[{call.HttpMethod}] {call.Uri}");
+                    if (call.RequestBodyInBytes != null && call.RequestBodyInBytes.Length < 2000)
+                    {
+                        Console.WriteLine($"Request: {System.Text.Encoding.UTF8.GetString(call.RequestBodyInBytes)}");
+                    }
+                    if (call.HttpStatusCode != null)
+                    {
+                        Console.WriteLine($"Status: {call.HttpStatusCode}");
+                    }
+                });
 
             _elasticClient = new ElasticClient(settings);
         }
@@ -135,19 +148,25 @@ namespace elasticsearch_search_drive_CLI.Services
                     .Index(_indexName)
                     .IndexMany(itemList, (descriptor, item) => descriptor.Id(item.Id)));
 
-                int successCount = response.Items.Count(i => i.IsValid);
-                Console.WriteLine($"Indexed {successCount} out of {itemList.Count} items.");
-
                 if (!response.IsValid)
                 {
-                    Console.WriteLine($"Bulk indexing had some failures: {response.ServerError?.Error?.Reason}");
+                    Console.WriteLine($"Bulk indexing response is invalid.");
+                    Console.WriteLine($"Server Error: {response.ServerError?.Error?.Reason}");
+                    Console.WriteLine($"Original Exception: {response.OriginalException?.Message}");
                 }
+
+                // Log item-level errors
+                LogBulkErrors(response);
+
+                int successCount = response.Items.Count(i => i.IsValid);
+                Console.WriteLine($"Indexed {successCount} out of {itemList.Count} items.");
 
                 return successCount;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error during batch indexing: {ex.Message}");
+                Console.WriteLine($"Stack Trace: {ex.StackTrace}");
                 return 0;
             }
         }
@@ -179,20 +198,43 @@ namespace elasticsearch_search_drive_CLI.Services
                     .Index(_indexName)
                     .IndexMany(itemList, (descriptor, item) => descriptor.Id(item.Id)), cancellationToken);
 
-                int successCount = response.Items.Count(i => i.IsValid);
-                Console.WriteLine($"Indexed {successCount} out of {itemList.Count} items.");
-
                 if (!response.IsValid)
                 {
-                    Console.WriteLine($"Bulk indexing had some failures: {response.ServerError?.Error?.Reason}");
+                    Console.WriteLine($"Bulk indexing response is invalid.");
+                    Console.WriteLine($"Server Error: {response.ServerError?.Error?.Reason}");
+                    Console.WriteLine($"Original Exception: {response.OriginalException?.Message}");
                 }
+
+                // Log item-level errors
+                LogBulkErrors(response);
+
+                int successCount = response.Items.Count(i => i.IsValid);
+                Console.WriteLine($"Indexed {successCount} out of {itemList.Count} items.");
 
                 return successCount;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error during async batch indexing: {ex.Message}");
+                Console.WriteLine($"Stack Trace: {ex.StackTrace}");
                 return 0;
+            }
+        }
+
+        /// <summary>
+        /// Logs detailed errors from bulk operation responses.
+        /// </summary>
+        private void LogBulkErrors(BulkResponse response)
+        {
+            if (response.ItemsWithErrors.Any())
+            {
+                Console.WriteLine($"\nItems with errors ({response.ItemsWithErrors.Count()}):");
+                foreach (var item in response.ItemsWithErrors)
+                {
+                    Console.WriteLine($"  - Item ID: {item.Id}");
+                    Console.WriteLine($"    Error: {item.Error?.Reason}");
+                    Console.WriteLine($"    Type: {item.Error?.Type}");
+                }
             }
         }
 

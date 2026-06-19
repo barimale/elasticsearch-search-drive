@@ -10,7 +10,7 @@
     },
     "Search by Extension": {
       "commandName": "Project",
-      "commandLineArgs": "search .txt --extension",
+      "commandLineArgs": "search .cs --extension",
       "environmentVariables": {
         "ELASTICSEARCH_URL": "http://localhost:9200",
         "INDEX_NAME": "disk-items"
@@ -34,7 +34,7 @@
     },
     "Index Recursive": {
       "commandName": "Project",
-      "commandLineArgs": "index C:\\ --recursive",
+      "commandLineArgs": "index R:\\ --recursive",
       "environmentVariables": {
         "ELASTICSEARCH_URL": "http://localhost:9200",
         "INDEX_NAME": "disk-items"

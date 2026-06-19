@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="elasticsearch-search-drive-CLI.slnx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="NEST" Version="7.17.5" />
   </ItemGroup>
 
