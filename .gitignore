@@ -6,3 +6,5 @@
 /elasticsearch-search-drive-CLI/.vs
 /elasticsearch-search-drive-CLI/elasticsearch-search-drive-CLI/bin/Debug/net10.0
 /elasticsearch-search-drive-CLI/elasticsearch-search-drive-CLI/obj
+/elasticsearch-search-drive-CLI/elasticsearch-search-drive-CLI.Tests/bin/Debug/net10.0
+/elasticsearch-search-drive-CLI/elasticsearch-search-drive-CLI.Tests/obj

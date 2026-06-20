@@ -1,7 +1,0 @@
-R:\elasticsearch-search-drive\elasticsearch-search-drive-CLI\elasticsearch-search-drive-CLI.Tests\bin\Debug\net10.0\.msCoverageSourceRootsMapping_elasticsearch-search-drive-CLI.Tests
-R:\elasticsearch-search-drive\elasticsearch-search-drive-CLI\elasticsearch-search-drive-CLI.Tests\obj\Debug\net10.0\elasticsearch-search-drive-CLI.Tests.csproj.AssemblyReference.cache
-R:\elasticsearch-search-drive\elasticsearch-search-drive-CLI\elasticsearch-search-drive-CLI.Tests\obj\Debug\net10.0\elasticsearch-search-drive-CLI.Tests.GeneratedMSBuildEditorConfig.editorconfig
-R:\elasticsearch-search-drive\elasticsearch-search-drive-CLI\elasticsearch-search-drive-CLI.Tests\obj\Debug\net10.0\elasticsearch-search-drive-CLI.Tests.AssemblyInfoInputs.cache
-R:\elasticsearch-search-drive\elasticsearch-search-drive-CLI\elasticsearch-search-drive-CLI.Tests\obj\Debug\net10.0\elasticsearch-search-drive-CLI.Tests.AssemblyInfo.cs
-R:\elasticsearch-search-drive\elasticsearch-search-drive-CLI\elasticsearch-search-drive-CLI.Tests\obj\Debug\net10.0\elasticsearch-search-drive-CLI.Tests.csproj.CoreCompileInputs.cache
-R:\elasticsearch-search-drive\elasticsearch-search-drive-CLI\elasticsearch-search-drive-CLI.Tests\obj\Debug\net10.0\elasticsearch-search-drive-CLI.Tests.sourcelink.json
