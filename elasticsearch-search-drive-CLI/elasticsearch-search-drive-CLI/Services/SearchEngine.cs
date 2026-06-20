@@ -180,7 +180,7 @@ namespace elasticsearch_search_drive_CLI.Services
             catch (Exception ex)
             {
                 Console.WriteLine($"Error searching by extension '{extension}' asynchronously: {ex.Message}");
-                return null;
+                throw;
             }
         }
 
