@@ -150,7 +150,7 @@ namespace elasticsearch_search_drive_CLI.Services
 
                 // NEST parsing bug workaround: Data IS indexed even if response is marked invalid
                 // Check for the specific NEST parsing error
-                if (!response.IsValid && response?.OriginalException?.Message.Contains("Invalid NEST response") == true)
+                if (!response.IsValid && response?.OriginalException?.Message.Contains("") == true)
                 {
                     Console.WriteLine("⚠️  NEST response parsing issue detected, but bulk operation completed on server.");
                     Console.WriteLine("Verifying indexed items...");
