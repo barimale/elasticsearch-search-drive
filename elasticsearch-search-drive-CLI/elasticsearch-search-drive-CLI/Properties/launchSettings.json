@@ -10,7 +10,7 @@
     },
     "Search by Extension": {
       "commandName": "Project",
-      "commandLineArgs": "search .cs --extension",
+      "commandLineArgs": "search .zip --extension",
       "environmentVariables": {
         "ELASTICSEARCH_URL": "http://localhost:9200",
         "INDEX_NAME": "disk-items"
