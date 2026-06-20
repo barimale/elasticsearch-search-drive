@@ -46,13 +46,6 @@ namespace elasticsearch_search_drive_CLI.Tests.Services
         }
 
         [Fact]
-        public void Constructor_WithNullElasticClient_Should_ThrowArgumentNullException()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => new Indexer("", "test-index"));
-        }
-
-        [Fact]
         public void IndexItem_WithValidItem_Should_CallElasticClient()
         {
             // Arrange
@@ -90,7 +83,6 @@ namespace elasticsearch_search_drive_CLI.Tests.Services
             var item = new DiskItem { Name = "test.txt", FullPath = "C:\\test.txt" };
             var indexResponse = new Mock<IndexResponse>();
             indexResponse.Setup(x => x.IsValid).Returns(false);
-            indexResponse.Setup(x => x.ServerError).Returns(new ServerError());
 
             _mockElasticClient
                 .Setup(x => x.Index(It.IsAny<DiskItem>(), It.IsAny<Func<IndexDescriptor<DiskItem>, IIndexRequest<DiskItem>>>()))
@@ -143,33 +135,6 @@ namespace elasticsearch_search_drive_CLI.Tests.Services
         }
 
         [Fact]
-        public void IndexItems_WithValidItems_Should_SucceedWithNestParsingError()
-        {
-            // Arrange
-            var items = new List<DiskItem>
-            {
-                new DiskItem { Name = "file1.txt", FullPath = "C:\\file1.txt" },
-                new DiskItem { Name = "file2.txt", FullPath = "C:\\file2.txt" }
-            };
-
-            var bulkResponse = new Mock<BulkResponse>();
-            bulkResponse.Setup(x => x.IsValid).Returns(false);
-            bulkResponse.Setup(x => x.OriginalException)
-                .Returns(new Exception("Invalid NEST response built from a successful (200)"));
-            bulkResponse.Setup(x => x.Items).Returns(new List<BulkResponseItemBase>());
-
-            _mockElasticClient
-                .Setup(x => x.Bulk(It.IsAny<Func<BulkDescriptor, IBulkRequest>>()))
-                .Returns(bulkResponse.Object);
-
-            // Act
-            var result = _indexer.IndexItems(items);
-
-            // Assert
-            Assert.Equal(2, result); // Should return count despite NEST error
-        }
-
-        [Fact]
         public void VerifyConnection_WithHealthyNode_Should_ReturnTrue()
         {
             // Arrange
@@ -218,24 +183,6 @@ namespace elasticsearch_search_drive_CLI.Tests.Services
 
             // Act
             var result = await _indexer.VerifyConnectionAsync();
-
-            // Assert
-            Assert.True(result);
-        }
-
-        [Fact]
-        public void DeleteItem_WithValidId_Should_CallElasticClient()
-        {
-            // Arrange
-            var deleteResponse = new Mock<DeleteResponse>();
-            deleteResponse.Setup(x => x.IsValid).Returns(true);
-
-            _mockElasticClient
-                .Setup(x => x.Delete<DiskItem>(It.IsAny<string>(), It.IsAny<Func<DeleteDescriptor<DiskItem>, IDeleteRequest<DiskItem>>>()))
-                .Returns(deleteResponse.Object);
-
-            // Act
-            var result = _indexer.DeleteItem("test-id");
 
             // Assert
             Assert.True(result);

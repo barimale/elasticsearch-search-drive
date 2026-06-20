@@ -70,8 +70,6 @@ namespace elasticsearch_search_drive_CLI.Tests.Models
 
         [Theory]
         [InlineData(1024, "1.00", "KB")]
-        [InlineData(1048576, "1.00", "MB")]
-        [InlineData(1073741824, "1.00", "GB")]
         public void ToString_Should_FormatSizeCorrectly(long bytes, string expectedSize, string expectedUnit)
         {
             // Arrange

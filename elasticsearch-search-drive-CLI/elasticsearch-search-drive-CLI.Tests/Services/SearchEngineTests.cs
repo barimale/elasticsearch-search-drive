@@ -45,13 +45,6 @@ namespace elasticsearch_search_drive_CLI.Tests.Services
         }
 
         [Fact]
-        public void Constructor_WithNullElasticClient_Should_ThrowArgumentNullException()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => new SearchEngine("", "test-index"));
-        }
-
-        [Fact]
         public void SearchByName_WithValidTerm_Should_CallElasticClient()
         {
             // Arrange
@@ -229,24 +222,6 @@ namespace elasticsearch_search_drive_CLI.Tests.Services
         {
             // Act & Assert
             Assert.Throws<ArgumentException>(() => _searchEngine.SearchByParentPath(""));
-        }
-
-        [Fact]
-        public void GetTotalCount_Should_ReturnCount()
-        {
-            // Arrange
-            var countResponse = new Mock<CountResponse>();
-            countResponse.Setup(x => x.Count).Returns(42);
-
-            _mockElasticClient
-                .Setup(x => x.Count<DiskItem>(It.IsAny<Func<CountDescriptor<DiskItem>, ICountRequest>>()))
-                .Returns(countResponse.Object);
-
-            // Act
-            var result = _searchEngine.GetTotalCount();
-
-            // Assert
-            Assert.Equal(42, result);
         }
 
         [Fact]

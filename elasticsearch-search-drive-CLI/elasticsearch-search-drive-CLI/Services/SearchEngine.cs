@@ -71,7 +71,7 @@ namespace elasticsearch_search_drive_CLI.Services
             catch (Exception ex)
             {
                 Console.WriteLine($"Error searching by name '{searchTerm}': {ex.Message}");
-                return null;
+                throw;
             }
         }
 
@@ -143,7 +143,7 @@ namespace elasticsearch_search_drive_CLI.Services
             catch (Exception ex)
             {
                 Console.WriteLine($"Error searching by extension '{extension}': {ex.Message}");
-                return null;
+                throw;
             }
         }
 
@@ -215,7 +215,7 @@ namespace elasticsearch_search_drive_CLI.Services
             catch (Exception ex)
             {
                 Console.WriteLine($"Error searching by path '{pathTerm}': {ex.Message}");
-                return null;
+                throw;
             }
         }
 
@@ -480,7 +480,7 @@ namespace elasticsearch_search_drive_CLI.Services
             catch (Exception ex)
             {
                 Console.WriteLine($"Error searching by parent path '{directoryPath}': {ex.Message}");
-                return null;
+                throw;
             }
         }
 

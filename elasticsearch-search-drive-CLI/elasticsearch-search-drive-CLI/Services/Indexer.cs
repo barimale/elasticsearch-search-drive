@@ -83,7 +83,7 @@ namespace elasticsearch_search_drive_CLI.Services
             catch (Exception ex)
             {
                 Console.WriteLine($"Error indexing item '{item?.Name}': {ex.Message}");
-                return false;
+                throw;
             }
         }
 
@@ -180,7 +180,7 @@ namespace elasticsearch_search_drive_CLI.Services
             {
                 Console.WriteLine($"Error during batch indexing: {ex.Message}");
                 Console.WriteLine($"Stack Trace: {ex.StackTrace}");
-                return 0;
+                throw;
             }
         }
 
@@ -289,7 +289,7 @@ namespace elasticsearch_search_drive_CLI.Services
             catch (Exception ex)
             {
                 Console.WriteLine($"Error deleting item with ID '{itemId}': {ex.Message}");
-                return false;
+                throw;
             }
         }
 
